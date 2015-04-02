@@ -1,5 +1,5 @@
-#ifndef WEAPONS_H_
-#define WEAPONS_H_
+#ifndef ALIENSPAWNER_H_
+#define ALIENSPAWNER_H_
 
 #define ALIEN_SPAWNER_ID 500
 
