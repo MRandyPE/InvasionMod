@@ -7,7 +7,7 @@
 #include <map>
 #include <memory>
 #include <lw.h>
-#include <addItems.h>
+#include <alienSpawner.h>
 bool reg=false;
 bool itemsAdded=false;
 
@@ -36,14 +36,14 @@ static void addShapedRecipe(int id, int count, int damage, std::string line1, st
 }
 
 static void Minecraft_selectLevel_hook(Level* level, Minecraft* mc, std::string const& str1, std::string const& str2, LevelSettings const& settings) {
-	ExampleItem* exampleItem=new ExampleItem(EXAMPLE_ITEM_ID-0x100, "potato_poisonous", 0, "Random Potato", 1, 10);
-	Item::items[EXAMPLE_ITEM_ID]=heavenSword;
+	AlienSpawner* alienSpawner=new AlienSpawner(ALIEN_SPAWNER_ID-0x100, "potato_poisonous", 0, "Alien Spawner", 1, 10);
+	Item::items[ALIEN_SPAWNER_ID]=alienSpawner;
 	if(!reg) {
 		reg=true;
-	    (*I18n_strings)["item.Random Potato.name"]="Random Potato";
-	    char exampleItemChars[]={'d', 'i', 'g'};
-	    int exampleItemIngs[]={264, 265, 266};
-	    addShapedRecipe(EXAMPLE_ITEM_ID, 1, 0, " dd", "did", "gd ", 3, exampleItemChars, exampleItemIngs);
+	    (*I18n_strings)["item.Alien Spawner.name"]="Alien Spawner";
+	    char asChars[]={'d', 'i', 'g'};
+	    int asIngs[]={264, 265, 266};
+	    addShapedRecipe(ALIEN_SPAWNER_ID, 1, 0, " dd", "did", "gd ", 3, asChars, asIngs);
 	}
 	Minecraft_selectLevel_real(level, mc, str1, str2, settings);
 }
@@ -54,7 +54,7 @@ static void Gui_render_hook(Gui* gui, float f1, bool b1, int i1, int i2) {
 
 static void CreativeInventoryScreen_populateItem_hook(Item* item, int count, int damage) {
 	if(!itemsAdded) {
-		CreativeInventoryScreen_populateItem_real(Item::items[EXAMPLE_ITEM_ID], 1, 0);
+		CreativeInventoryScreen_populateItem_real(Item::items[ALIEN_SPAWNER_ID], 1, 0);
 		itemsAdded=true;
 	}
 	CreativeInventoryScreen_populateItem_real(item, count, damage);
