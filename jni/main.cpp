@@ -36,7 +36,9 @@ static void addShapedRecipe(int id, int count, int damage, std::string line1, st
 }
 
 static void Minecraft_selectLevel_hook(Level* level, Minecraft* mc, std::string const& str1, std::string const& str2, LevelSettings const& settings) {
-	AlienSpawner* alienSpawner=new AlienSpawner(ALIEN_SPAWNER_ID-0x100, "potato_poisonous", 0, "Alien Spawner", 1, 10);
+	TextureFile itemTextures = FILE_ITEM;
+	TextureUVCoordinateSet alienSpawnerTexture = new TextureUVCoordinateSet(0.8125F, 0.8125F, ,0.875F, 256.0F, 256.0F, 0, itemTextures);
+	AlienSpawner* alienSpawner=new AlienSpawner(ALIEN_SPAWNER_ID-0x100, alienSpawnerTexture, "Alien Spawner", 1, 10);
 	Item::items[ALIEN_SPAWNER_ID]=alienSpawner;
 	if(!reg) {
 		reg=true;
