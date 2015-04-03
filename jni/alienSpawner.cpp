@@ -1,5 +1,5 @@
 #include <lw.h>
-#include <addItems.h>
+#include <alienSpawner.h>
 
 AlienSpawner::AlienSpawner(int id, std::string const& icon, int addTex, std::string const& name, int maxStack, int damage) : Item(id) {
 	this->setIcon(icon, addTex);
