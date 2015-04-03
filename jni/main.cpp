@@ -36,16 +36,11 @@ static void addShapedRecipe(int id, int count, int damage, std::string line1, st
 }
 
 static void Minecraft_selectLevel_hook(Level* level, Minecraft* mc, std::string const& str1, std::string const& str2, LevelSettings const& settings) {
-	TextureFile itemTextures = FILE_ITEM;
-	TextureUVCoordinateSet alienSpawnerTexture = new TextureUVCoordinateSet(0.8125F, 0.8125F, ,0.875F, 256.0F, 256.0F, 0, itemTextures);
-	AlienSpawner* alienSpawner=new AlienSpawner(ALIEN_SPAWNER_ID-0x100, alienSpawnerTexture, "Alien Spawner", 1, 10);
+	AlienSpawner* alienSpawner=new AlienSpawner(ALIEN_SPAWNER_ID-0x100, "Alien Spawner", 64);
 	Item::items[ALIEN_SPAWNER_ID]=alienSpawner;
 	if(!reg) {
 		reg=true;
 	    (*I18n_strings)["item.Alien Spawner.name"]="Alien Spawner";
-	    char asChars[]={'d', 'i', 'g'};
-	    int asIngs[]={264, 265, 266};
-	    addShapedRecipe(ALIEN_SPAWNER_ID, 1, 0, " dd", "did", "gd ", 3, asChars, asIngs);
 	}
 	Minecraft_selectLevel_real(level, mc, str1, str2, settings);
 }

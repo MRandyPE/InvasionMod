@@ -7,10 +7,7 @@
 
 class AlienSpawner : public Item {
 public:
-    int attackDamage;
-public:
-    AlienSpawner(int, TextureUVCoordinateSet, std::string const&, int, int);
-    virtual int getAttackDamage(Entity*);
+    AlienSpawner(int, std::string const&, int);
 	virtual bool useOn(ItemInstance *, Player *, int, int, int, signed char, float, float, float);
 };
 
