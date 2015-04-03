@@ -40,7 +40,7 @@ static void Minecraft_selectLevel_hook(Level* level, Minecraft* mc, std::string 
 	Item::items[ALIEN_SPAWNER_ID]=alienSpawner;
 	if(!reg) {
 		reg=true;
-	    (*I18n_strings)["item.Alien Spawner.name"]="Alien Spawner";
+	    (*I18n_strings)["item.Alien Spawner.name"]="Spawn Alien Villager";
 	}
 	Minecraft_selectLevel_real(level, mc, str1, str2, settings);
 }
