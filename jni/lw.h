@@ -3,6 +3,9 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include "mcpe/tile/TileTypeEnum.h"
+#include "mcpe/tile/RenderLayerEnum.h"
+#include "mcpe/tileentity/TileEntityTypeEnum.h"
 class LevelSettings;
 class Level;
 class TileEntity;
@@ -149,9 +152,64 @@ public:
 
 class Tile {
 public:
-	enum SoundType {
+	// inner classes
+	class SoundType {
+		SoundType(const std::string &, float, float);
+		~SoundType();
 	};
-	char filler[0x8c];
+	
+public:
+	static Tile *netherFence, *stairs_netherBricks, *stairs_sandStone, *quartzBlock, *mycelium, *brownMushroomBlock, *redMushroomBlock, *emeraldBlock, *redStoneDust, *waterlily, *emeraldOre;
+	static Tile *woodStairsJungle, *woodStairsBigOak, *woodStairsAcacia, *deadBush, *leaves2, *log2, *stairs_stoneBrickSmooth, *netherBrick, *netherrack, *ironFence, *stairs_quartz, *stainedClay;
+	static Tile *pumpkin, *litPumpkin, *info_updateGame1, *carrots, *potatoes, *beetroot, *netherReactor, *glowingObsidian, *woodStairsDark, *woodStairsBirch, *hayBlock, *coalBlock, *woolCarpet;
+	static Tile *stoneBrickSmooth, *fenceGateOak, *fenceGateSpruce, *fenceGateBirch, *fenceGateJungle, *fenceGateBigOak, *fenceGateAcacia, *info_updateGame2, *info_reserved6, *cobbleWall;
+	static Tile *stairs_stone, *stairs_brick, *door_wood, *door_iron, *cactus, *rail, *goldenRail, *activatorRail, *melon, *pumpkinStem, *melonStem, *bed, *tallgrass, *trapdoor, *monsterStoneEgg;
+	static Tile *water, *lava, *fire, *invisible_bedrock, *goldBlock, *ironBlock, *diamondBlock, *workBench, *stonecutterBench, *crops, *furnace, *furnace_lit, *chest, *lightGem, *stairs_wood, *fence;
+	static Tile *redStoneOre, *redStoneOre_lit, *goldOre, *ironOre, *coalOre, *lapisOre, *lapisBlock, *reeds, *ladder, *obsidian, *tnt, *bookshelf, *sign, *wallSign, *mossStone, *torch, *mobSpawner;
+	static Tile *sandStone, *sand, *stoneSlab, *stoneSlabHalf, *woodSlab, *woodSlabHalf, *cloth, *yellowFlower, *redFlower, *brownMushroom, *redMushroom, *topSnow, *log, *snow, *leaves, *diamondOre;
+	static Tile *calmLava, *calmWater, *thinGlass, *web, *glass, *sponge, *sapling, *wood, *redBrick, *farmland, *clay, *ice, *grass, *podzol, *dirt, *unbreakable, *rock, *gravel, *stoneBrick, *endStone;
+	static Tile *hardenedClay, *doublePlant;
+
+	static SoundType SOUND_SILENT, SOUND_SAND, SOUND_CLOTH, SOUND_GLASS, SOUND_METAL, SOUND_STONE, SOUND_GRASS, SOUND_GRAVEL, SOUND_WOOD, SOUND_NORMAL;
+
+	static bool shouldTick[255];
+	static float translucency[255];
+	static bool solid[255];
+	static float lightEmission[255];
+	static int lightBlock[255];
+	static Tile *tiles[255];
+	static TextureAtlas *_terrainTextureAtlas;
+	static const char *TILE_DESCRIPTION_PREFIX;
+
+public:
+	// Size : 140
+	//void **vtable;		// 0
+	char filler1[52];					//4
+	bool _replaceable;					//56
+	AABB shape;							//60
+	TextureUVCoordinateSet tex;			//64
+	char filler_tile[4];	//const TileID id;			//68
+	const SoundType* soundType;			//72
+	RenderLayer renderLayer;			//76
+	bool canBuildOver;					//80
+	int renderShape;					//84
+	TileType tileType;					//88
+	TileEntityType tileEntityType;		//92
+	float thickness;					//96
+	bool canSlide;						//100
+	bool canInstatick;					//104
+	float gravity;						//108
+	const Material* material;			//112
+	float friction;						//116
+	float destroyTime;					//120
+	float explosionResistance;			
+	int creativeCategory;				//124
+	bool fancy;							//128
+	char filler2[4];		//std::shared_ptr<TextureAtlas> _terrainTextureAtlas;  //132
+	unsigned int faceTextureIsotropic;	//136
+	std::string descriptionId;			//140
+
+public:
 	Tile(int, Material const*);
 	Tile(int, TextureUVCoordinateSet, Material const*);
 	Tile(int, std::string, Material const*);
@@ -226,9 +284,17 @@ public:
 	virtual void setTicking(bool); // 71
 	virtual void getSpawnResourcesAuxValue(int); // 72
 	virtual void init(); // 73
-	static Tile* tiles[256];
+	//virtual bool isLiquidTile();
 	static void initTiles();
+	static Material *getTileMaterial(int);
+	static float getLightEmission(TileID);
+	static int getIDByName(const std::string &, bool);
+	void _getTypeToSpawn(TileSource &, int, const TilePos &) const;
+	void addAABB(const AABB &, const AABB *, std::vector<AABB> &);
 	void setCategory(int);
+	TextureAtlasTextureItem getTextureItem(const std::string &);
+	float getShadeBrightness() const;
+	static TextureUVCoordinateSet getTextureUVCoordinateSet(const std::string &, int);
 };
 
 class ItemInstance {
@@ -701,9 +767,19 @@ public:
 
 class Item {
 public:
-    char filler[56];
-    int category;
-    char filler1[12];
+    int _maxStackSize;
+	std::string _textureAtlasFile;
+	int _frameCount;
+	bool _animatesInToolbar;
+	const int id;
+	int maxDamage;
+	int creativeCategory;
+	bool _handEquipped;
+	bool _isStackedByData;
+	Item* craftingRemainingItem;
+	std::string descriptionId;
+
+	char filler_item[76];
 public:
     static Item* items[512];
     static TextureAtlas *_itemTextureAtlas;
