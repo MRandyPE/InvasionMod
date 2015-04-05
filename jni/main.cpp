@@ -54,7 +54,6 @@ static void Minecraft_selectLevel_hook(Level* level, Minecraft* mc, std::string 
 static void Tile_initTiles_hook() {
 	Tile_initTiles_real();
 	GlowstoneTorch* glowstoneTorch = new GlowstoneTorch(GLOWSTONE_TORCH_ID, "Glowstone Torch");
-	Tile::tiles[GLOWSTONE_TORCH_ID] = glowstoneTorch;
 	TileItem* glowstoneTorchItem=new TileItem(GLOWSTONE_TORCH_ID-0x100);
 }
 

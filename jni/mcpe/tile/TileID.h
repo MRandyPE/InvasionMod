@@ -2,7 +2,7 @@
 
 class TileID {
 public:
-	static unsigned char AIR;
+	static unsigned char *AIR;
 
 public:
 	unsigned char *_id;

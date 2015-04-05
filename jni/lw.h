@@ -6,6 +6,7 @@
 #include "mcpe/tile/TileTypeEnum.h"
 #include "mcpe/tile/RenderLayerEnum.h"
 #include "mcpe/tileentity/TileEntityTypeEnum.h"
+#include "mcpe/tile/TileID.h"
 class LevelSettings;
 class Level;
 class TileEntity;
@@ -18,7 +19,6 @@ class MinecraftClient;
 class IntRectangle;
 class CompoundTag;
 class EntityPos;
-class TileID;
 class Player;
 class ChunkPos;
 class Mob;
@@ -188,7 +188,7 @@ public:
 	bool _replaceable;					//56
 	AABB shape;							//60
 	TextureUVCoordinateSet tex;			//64
-	char filler_tile[4];	//const TileID id;			//68
+	const TileID id;			//68
 	const SoundType* soundType;			//72
 	RenderLayer renderLayer;			//76
 	bool canBuildOver;					//80
