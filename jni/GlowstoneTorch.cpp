@@ -1,12 +1,7 @@
 #include <GlowstoneTorch.h>
 #include "mcpe/level/TileSource.h"
 
-GlowstoneTorch::GlowstoneTorch(int id, std::string const& desc) : Tile(id, &Material::decoration) {
-	TextureUVCoordinateSet referenceTexture = Tile::getTextureUVCoordinateSet("wool", 13);
-	referenceTexture.endX = 0.1875;
-	referenceTexture.startY = 0.6875;
-	referenceTexture.endY = 0.8125;
-	this->tex = referenceTexture;
+GlowstoneTorch::GlowstoneTorch(int id, std::string const& desc) : Tile(id, "glowstone_torch",&Material::decoration) {
 	this->setDescriptionId(desc);
 	this->setTicking(true);
 	this->setLightEmission(0.85F);
@@ -23,14 +18,14 @@ void GlowstoneTorch::animateTick(TileSource* ts, int x, int y, int z, Random* ra
 	Tile::torch->animateTick(ts, x, y, z, rand);
 }
 
-/*bool GlowstoneTorch::checkCanSurvive(TileSource* ts, int x, int y, int z) {
+bool GlowstoneTorch::checkCanSurvive(TileSource* ts, int x, int y, int z) {
 	if(!this->mayPlace(ts, x, y, z)) {
 		if(ts->getTilePtr(x, y, z) == this) {
 			this->spawnResources(ts, x, y, z, ts->getData(x, y, z), 0.0F);
 			ts->setTile(x, y, z, Tile::tiles[0]->id, 3);
 		}
 	}
-}*/
+}
 
 AABB* GlowstoneTorch::getAABB(TileSource* ts, int x, int y, int z, AABB& aabb, int i1, bool b1, int i2) {
 	return Tile::torch->getAABB(ts, x, y, z, aabb, i1, b1, i2);
@@ -67,4 +62,8 @@ void GlowstoneTorch::onPlace(TileSource* ts, int x, int y, int z) {
 
 void GlowstoneTorch::tick(TileSource* ts, int x, int y, int z, Random* rand) {
 	return Tile::torch->tick(ts, x, y, z, rand);
+}
+
+void handleEntityInside(TileSource* ts, int x, int y, int z, Entity* entity, Vec3& vec3) {
+
 }

@@ -294,7 +294,7 @@ public:
 	void setCategory(int);
 	TextureAtlasTextureItem getTextureItem(const std::string &);
 	float getShadeBrightness() const;
-	static TextureUVCoordinateSet getTextureUVCoordinateSet(const std::string &, int);
+	TextureUVCoordinateSet getTextureUVCoordinateSet(const std::string &, int);
 };
 
 class ItemInstance {

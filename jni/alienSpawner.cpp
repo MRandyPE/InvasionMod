@@ -2,10 +2,7 @@
 #include <alienSpawner.h>
 
 AlienSpawner::AlienSpawner(int id, std::string const& name, int maxStack) : Item(id) {
-	TextureUVCoordinateSet referenceTextures = Item::getTextureUVCoordinateSet("compass_item", 0);
-	referenceTextures.startX = 0.8125F;
-	referenceTextures.endX = 0.875F;
-	this->setIcon(referenceTextures);
+	this->setIcon("alien_spawner", 0);
 	this->setDescriptionId(name);
 	this->setMaxStackSize(maxStack);
 	this->handEquipped();

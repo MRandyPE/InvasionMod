@@ -8,7 +8,7 @@ class GlowstoneTorch : public Tile {
 public:
 	GlowstoneTorch(int, std::string const&);
 	virtual void animateTick(TileSource*, int, int, int, Random*);
-	//virtual bool checkCanSurvive(TileSource*, int, int, int);
+	virtual bool checkCanSurvive(TileSource*, int, int, int);
 	virtual AABB *getAABB(TileSource*, int, int, int, AABB&, int, bool, int);
 	virtual int getIconYOffset() const;
 	virtual void getPlacementDataValue(Mob*, int, int, int, signed char, float, float, float, int);
@@ -18,6 +18,7 @@ public:
 	virtual void neighborChanged(TileSource*, int, int, int, int, int, int);
 	virtual void onPlace(TileSource*, int, int, int);
 	virtual void tick(TileSource*, int, int, int, Random*);
+	virtual void handleEntityInside(TileSource*, int, int, int, Entity*, Vec3&);
 };
 
 #endif
