@@ -6,6 +6,8 @@ GlowstoneTorch::GlowstoneTorch(int id, std::string const& desc) : Tile(id, "glow
 	this->setTicking(true);
 	this->setLightEmission(0.85F);
 	this->setCategory(2);
+	this->renderShape = 2;
+	this->renderLayer = RENDERLAYER_OPAQUE; //Maybe this is the correct layer?
 	Tile::tiles[id] = this;
 	Tile::solid[id] = false;
 }
