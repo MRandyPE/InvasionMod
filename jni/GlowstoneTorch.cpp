@@ -64,6 +64,5 @@ void GlowstoneTorch::tick(TileSource* ts, int x, int y, int z, Random* rand) {
 	return Tile::torch->tick(ts, x, y, z, rand);
 }
 
-void handleEntityInside(TileSource* ts, int x, int y, int z, Entity* entity, Vec3& vec3) {
-
+void GlowstoneTorch::handleEntityInside(TileSource* ts, int x, int y, int z, Entity* entity, Vec3& vec3) {
 }
